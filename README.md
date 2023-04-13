@@ -3,9 +3,14 @@
 
 一.以下使用Windows系统环境配置
   1.1 为满足对不同python版本环境和可视化编程需求，这里安装pycharm和anaconda虚拟环境（当然你也可以使用vs看你个人使用习惯）。
-  配置虚拟环境需要通过anaconda来完成，anaconda的下载地址为：https://www.anaconda.com/
+  配置虚拟环境需要通过anaconda来完成，anaconda的下载地址为：
   
-  windows用户下载python3.8的miniconda也可下载地址为：https://docs.conda.io/en/latest/miniconda.html，
+        https://www.anaconda.com/
+  
+  windows用户下载python3.8的miniconda也可下载地址为：
+        
+        https://docs.conda.io/en/latest/miniconda.html
+        
   下载完毕之后双击安装即可，注意一点这些一定要选中
   
 ![114f0bfcbd637b396a431782a5349858](https://user-images.githubusercontent.com/130628227/231653265-b0f147e8-1530-4e6b-af36-94590106f87b.png)
@@ -21,7 +26,8 @@
 ![capture_20230413133309564](https://user-images.githubusercontent.com/130628227/231662778-4ff44fdd-02f7-4c8d-8bc4-f57d46eec0eb.jpg)
 
 然后在命令行中输入下列指令创建虚拟环境，这里使用3.8.5版本（3.9.x以上的版本可能会导致opencv无法读图等问题）
-conda create -n yolo python==3.8.5
+
+      conda create -n yolo python==3.8.5
 
 这条指令的含义是创建python版本为3.8.5，名称为yolo的虚拟环境
 
@@ -30,49 +36,44 @@ conda create -n yolo python==3.8.5
 
 安装结束之后输入下列指令激活虚拟环境，出现小括号(yolo)表示环境激活成功
 
-conda activate yolo
+      conda activate yolo
 
 为了加速下载添加anaconda国内镜像配置
 清华TUNA提供了 Anaconda 仓库的镜像,运行以下三个命令:
 
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
-
-conda config --set show_channel_urls yes
+    conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+    conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+    conda config --set show_channel_urls yes
 
 添加USTC仓库镜像：
 
-conda config --remove-key channels
-
-conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/main/
-
-conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free/
-
-conda config --add channels https://mirrors.bfsu.edu.cn/anaconda/cloud/pytorch/
-
-conda config --set show_channel_urls yes
-
-pip config set global.index-url https://mirrors.ustc.edu.cn/pypi/web/simple
+    conda config --remove-key channels
+    conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/main/
+    conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free/
+    conda config --add channels https://mirrors.bfsu.edu.cn/anaconda/cloud/pytorch/
+    conda config --set show_channel_urls yes
+    pip config set global.index-url https://mirrors.ustc.edu.cn/pypi/web/simple
 
 Conda 附加库:
 Conda Forge
 
-conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/
+    conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/
 
 msys2
 
-conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/msys2/
+    conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/msys2/
 
 bioconda
 
-conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/bioconda/
+    conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/bioconda/
 
 menpo
 
-conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/menpo/
+    conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/menpo/
 
-  1.2 为了方便查看和调试代码，我们这里使用pycharm，pycharm的下载地址为：https://www.jetbrains.com/pycharm/download/#section=windows
+  1.2 为了方便查看和调试代码，我们这里使用pycharm，pycharm的下载地址为：
+  
+      https://www.jetbrains.com/pycharm/download/#section=windows
   
   1.3 pytorch安装（gpu版本和cpu版本的安装）
 实际测试情况是YOLOv5在CPU和GPU的情况下均可使用，不过在CPU的条件下训练那个速度会令人发指，所以有条件的小伙伴一定要安装GPU版本的Pytorch，没有条件的小伙伴最好是租服务器来使用。
@@ -111,21 +112,19 @@ GPU版本Tensorflow的安装
 安装
 我们首先需要使用conda安装cuda和cudnn
 
-conda install cudatoolkit=10.1
-
-conda install cudnn==7.6.5
+    conda install cudatoolkit=10.1
+    conda install cudnn==7.6.5
 
 然后使用pip指令安装gpu版本的tensorflow
 
-pip install tensorflow-gpu==2.3.0
+    pip install tensorflow-gpu==2.3.0
 
 测试GPU是否可用
 现在在命令行中测试一下GPU是否可用，首先输入python进入python的解释器中
 输入下面两条指令，如果输出为True则表示GPU可以使用
 
-import tensorflow as tf
-
-print(tf.test.is_gpu_available())
+    import tensorflow as tf
+    print(tf.test.is_gpu_available())
 
 tensorflow如果安装的是GPU版本的则默认使用GPU，大家不需要在代码中指定，直接使用即可
 
@@ -138,22 +137,21 @@ GPU版本Pytorch的安装
 安装
 我们这里使用conda进行gpu版本pytorch的安装，非常方便，直接在激活的虚拟环境中输入下列命令即可，这里安装的是最新版本的Pytorch
 
-conda install pytorch torchvision torchaudio cudatoolkit=10.2
+    conda install pytorch torchvision torchaudio cudatoolkit=10.2
 
 30系的朋友需要cuda11的支持，请执行下列命令
 
-conda install pytorch torchvision torchaudio cudatoolkit=11.1 -c pytorch -c conda-forge
+    conda install pytorch torchvision torchaudio cudatoolkit=11.1 -c pytorch -c conda-forge
 
 如果需要指定版本号，请这样执行
 
-conda install pytorch==1.5.0 torchvision==0.6.1 cudatoolkit=10.2
+    conda install pytorch==1.5.0 torchvision==0.6.1 cudatoolkit=10.2
 
 测试GPU是否可用
 现在在命令行中测试一下GPU是否可用，首先输入python进入python的解释器中输入下面两条指令，如果输出为True则表示GPU可以使用
 
-import torch
-
-print(torch.cuda.is_available())
+    import torch
+    print(torch.cuda.is_available())
 
 不过Pytorch会讲究使用device来指定GPU，需要大家通过to()方法做下转移
 
