@@ -112,6 +112,7 @@ GPU版本Tensorflow的安装
 我们首先需要使用conda安装cuda和cudnn
 
 conda install cudatoolkit=10.1
+
 conda install cudnn==7.6.5
 
 然后使用pip指令安装gpu版本的tensorflow
@@ -123,6 +124,7 @@ pip install tensorflow-gpu==2.3.0
 输入下面两条指令，如果输出为True则表示GPU可以使用
 
 import tensorflow as tf
+
 print(tf.test.is_gpu_available())
 
 tensorflow如果安装的是GPU版本的则默认使用GPU，大家不需要在代码中指定，直接使用即可
@@ -150,6 +152,7 @@ conda install pytorch==1.5.0 torchvision==0.6.1 cudatoolkit=10.2
 现在在命令行中测试一下GPU是否可用，首先输入python进入python的解释器中输入下面两条指令，如果输出为True则表示GPU可以使用
 
 import torch
+
 print(torch.cuda.is_available())
 
 不过Pytorch会讲究使用device来指定GPU，需要大家通过to()方法做下转移
